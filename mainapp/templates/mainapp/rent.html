@@ -1,0 +1,72 @@
+{% extends 'mainapp/layout/base.html' %}
+{% load static %}
+
+{% block title %}Rent{% endblock %}
+
+{% block content %}
+<form id="myForm" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleInputAgent" class="form-label">Agent</label>
+        <input name="agent" type="text" class="form-control" id="exampleInputAgent" placeholder="Enter agent">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Name</label>
+        <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="Enter full name">
+    </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+    <div class="mb-3">
+        <label for="exampleInputDateOut" class="form-label">Date out</label>
+        <input name="date_out" type="date" class="form-control" id="exampleInputDateOut" placeholder="Enter date out">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputTimeOut" class="form-label">Time</label>
+        <input name="time_out" type="time" class="form-control" id="exampleInputTimeOut" placeholder="Enter time out">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputDateIn" class="form-label">Date in</label>
+        <input name="date_in" type="date" class="form-control" id="exampleInputDateIn" placeholder="Enter date in">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputTimeIn" class="form-label">Time</label>
+        <input name="time_in" type="time" class="form-control" id="exampleInputTimeIn" placeholder="Enter time in">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputFuel" class="form-label">Fuel</label>
+        <input name="fuel" type="text" class="form-control" id="exampleInputFuel" placeholder="Enter fuel">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputMilage" class="form-label">Milage</label>
+        <input name="milage" type="text" class="form-control" id="exampleInputMilage" placeholder="Enter milage">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputNotes" class="form-label">Example textarea</label>
+      <textarea name="notes" class="form-control" id="exampleInputNotes" placeholder="Enter notes" rows="3"></textarea>
+    </div>
+
+<input type="hidden" id="carId" name="carId">
+  <input type="submit" class="btn btn-primary"></input>
+</form>
+<script>
+        function getId() {
+            var url = window.location.href;
+            var parts = url.split("/");
+            var carId = parts[parts.length - 2];
+            return carId;
+        }
+
+        window.onload = function() {
+            var carId = getId();
+
+            document.getElementById("carId").value = carId;
+
+            var form = document.getElementById("myForm");
+            form.action = "{% url 'rentCar' 0 %}".replace("0", carId);
+
+            console.log("{% url 'rentCar' 0 %}".replace("0", carId));
+        };
+    </script>
+{% endblock %}

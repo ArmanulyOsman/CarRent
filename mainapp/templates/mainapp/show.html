@@ -1,0 +1,30 @@
+{% extends 'mainapp/layout/base.html' %}
+{% load static %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block css %}
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <img src="{{ car.photo.url }}" class="card-img-top" alt="Placeholder Image">
+    </div>
+    <div class="col">
+      <h2>{{ car.name }}</h2>
+      <p>{{ car.description }}</p>
+      <h3>Price: {{ car.price }}/day</h3>
+      <p>Transmission: {{ car.transmission_type }}</p>
+    </div>
+  </div>
+
+<div class="d-flex gap-2 justify-content-center py-5">
+    <a class="btn btn-success rounded-pill px-3" type="button" href="{% url 'rent' car.id %}">Rent</a>
+</div>
+{% endblock%}

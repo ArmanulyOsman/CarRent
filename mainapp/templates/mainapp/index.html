@@ -1,0 +1,27 @@
+{% extends 'mainapp/layout/base.html' %}
+{% load static %}
+
+{% block title %}Car rent{% endblock %}
+
+{% block content %}
+<div class="row center-block" >
+    {% for car in cars %}
+        {% if car.is_free %}
+            <div class="col-sm-4 card " style="width: 18rem; margin: 10px 20px 30px;">
+                <img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.name }}</h5>
+                    <p class="card-text">{{ car.price }}/day</p>
+                    <a href="{% url 'show' car.id %}" class="btn btn-primary">Show</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<script>
+    if ("{{message}}" != ""){
+            alert("{{message}}")
+    }
+</script>
+{% endblock %}
+
