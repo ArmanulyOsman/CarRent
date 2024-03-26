@@ -70,4 +70,3 @@ def searchCar(request):
     except:
         return index(request, message='Car not found')
 
-
